@@ -27,6 +27,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _PhaseValue: 0.63
+    - _QueueControl: 0
     m_Colors: []
   m_BuildTextureStacks: []
   m_AllowLocking: 1
