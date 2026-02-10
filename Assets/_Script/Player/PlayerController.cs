@@ -17,6 +17,12 @@ public class PlayerController : MonoBehaviour
     int hashMouseLeft;
     int hashMouseRight;
 
+    [Header("Gimmick")]
+    public PhaseGimmick phaseGimmick;
+    public DesolveGimmick desolveGimmick;
+    public float ToggleDurationSeconds = 0.35f;
+
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Awake()
     {
@@ -54,13 +60,27 @@ public class PlayerController : MonoBehaviour
     private void MouseLeftClick()
     {
         Debug.Log("좌클릭");
-        anim.SetTrigger(hashMouseLeft);
+        //anim.SetTrigger(hashMouseLeft);
+        if (phaseGimmick != null)
+        {
+            phaseGimmick.TogglePhaseSmooth(ToggleDurationSeconds);
+        }
+
+
     }
 
     private void MouseRightClick()
     {
         Debug.Log("우클릭");
-        anim.SetTrigger(hashMouseRight); // 우클릭도 같은 트리거면 그대로
+        //anim.SetTrigger(hashMouseRight); // 우클릭도 같은 트리거면 그대로
+
+        if (desolveGimmick != null)
+        {
+            desolveGimmick.ToggleDesolveSmooth(ToggleDurationSeconds);
+        }
+
+        
+
     }
     private void  HandleJump()
     {
