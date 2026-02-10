@@ -1263,6 +1263,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Avatar_Female_Size03_Evelyn_UI
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6b5496882c5fdc04086e3cc197ae4de5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: 6b5496882c5fdc04086e3cc197ae4de5, type: 3}
       propertyPath: m_Controller
       value: 
@@ -3104,8 +3108,10 @@ GameObject:
   - component: {fileID: 1417417426}
   - component: {fileID: 1417417425}
   - component: {fileID: 1417417424}
+  - component: {fileID: 1417417427}
+  - component: {fileID: 1417417428}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: GameManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3168,6 +3174,42 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1417417427
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1417417423}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e37f7c206c772bd449a9c95f3bda21c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shaderGraphMaterialA: {fileID: 2100000, guid: 23c736b740222594d8458570784dc61b, type: 2}
+  shaderGraphMaterialB: {fileID: 2100000, guid: 68e54ce41eb3c8e49aa28d731374502f, type: 2}
+  phasePropertyReference: _PhaseValue
+  phaseValue: 0.6
+  minPhaseValue: -0.6
+  maxPhaseValue: 0.6
+--- !u!114 &1417417428
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1417417423}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2441ab02504b28468272ff12a9e2c91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetMaterial: {fileID: 2100000, guid: e4b0ba1a7b76ee041b39405607caa6f5, type: 2}
+  desolvePropertyReference: _DesolveValue
+  desolveValue: 1
+  minDesolveValue: 0
+  maxDesolveValue: 1
+  findColliderInChildren: 1
 --- !u!1001 &1419081246
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3402,7 +3444,7 @@ Transform:
   m_GameObject: {fileID: 1517274456}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 10.37999, y: 8.6, z: -365.61}
+  m_LocalPosition: {x: 10.37999, y: 8.6, z: -334.2}
   m_LocalScale: {x: 10, y: 12.585836, z: 1.3175185}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4078,6 +4120,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3da7647021f79c42bf42da5ca144eff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  phaseGimmick: {fileID: 0}
+  desolveGimmick: {fileID: 0}
+  ToggleDurationSeconds: 0.35
 --- !u!143 &1911539892
 CharacterController:
   m_ObjectHideFlags: 0
@@ -4145,6 +4190,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3da7647021f79c42bf42da5ca144eff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  phaseGimmick: {fileID: 1417417427}
+  desolveGimmick: {fileID: 1417417428}
+  ToggleDurationSeconds: 0.35
 --- !u!1 &2009445819
 GameObject:
   m_ObjectHideFlags: 0
