@@ -6,6 +6,8 @@ public class PlayerController : MonoBehaviour
 {
     Animator anim;
     CharacterController cc;
+    public GimmickController gimmickController;
+
 
     float walkSpeed = 3f;
     float runSpeed = 6f;
@@ -63,7 +65,8 @@ public class PlayerController : MonoBehaviour
         //anim.SetTrigger(hashMouseLeft);
         if (phaseGimmick != null)
         {
-            phaseGimmick.TogglePhaseSmooth(ToggleDurationSeconds);
+            phaseGimmick.PhaseToggle(ToggleDurationSeconds);
+            gimmickController.TogglePhaseAB();
         }
 
 
@@ -76,7 +79,8 @@ public class PlayerController : MonoBehaviour
 
         if (desolveGimmick != null)
         {
-            desolveGimmick.ToggleDesolveSmooth(ToggleDurationSeconds);
+            desolveGimmick.DesolveToggle(ToggleDurationSeconds);
+            gimmickController.ToggleDesolveSolid();
         }
 
         

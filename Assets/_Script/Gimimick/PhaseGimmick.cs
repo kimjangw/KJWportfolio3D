@@ -10,16 +10,12 @@ public class PhaseGimmick : MonoBehaviour
     [Header("Shader Property Reference")]
     public string phasePropertyReference = "PhaseValue";
 
-    [Header("Control")]
+    [Header("Control (toggle)")]
     [Range(-0.6f, 0.6f)]
     public float phaseValue = 0.6f;
 
-    [Header("Phase Range")]
-    public float minPhaseValue = -0.6f;
-    public float maxPhaseValue = 0.6f;
-
     int phasePropertyId;
-    Coroutine phaseSmoothCoroutine;
+    Coroutine toggleCoroutine;
 
     void Awake()
     {
@@ -27,19 +23,13 @@ public class PhaseGimmick : MonoBehaviour
         Apply();
     }
 
-    void OnValidate()
+    void Apply()
     {
-        phasePropertyId = Shader.PropertyToID(phasePropertyReference);
-        Apply();
+        ApplyToMaterial(shaderGraphMaterialA);
+        ApplyToMaterial(shaderGraphMaterialB);
     }
 
-    public void Apply()
-    {
-        ApplyPhaseValueToMaterial(shaderGraphMaterialA);
-        ApplyPhaseValueToMaterial(shaderGraphMaterialB);
-    }
-
-    void ApplyPhaseValueToMaterial(Material targetMaterial)
+    void ApplyToMaterial(Material targetMaterial)
     {
         if (targetMaterial == null)
         {
@@ -49,55 +39,39 @@ public class PhaseGimmick : MonoBehaviour
         if (!targetMaterial.HasProperty(phasePropertyId))
         {
             Debug.LogWarning(
-                $"[Gimmick] Material '{targetMaterial.name}' does not have property '{phasePropertyReference}'. " +
-                $"Check ShaderGraph property Reference name.",
+                $"[PhaseGimmick] Material '{targetMaterial.name}' does not have property '{phasePropertyReference}'.",
                 this
             );
             return;
         }
 
-        float clampedPhaseValue = Mathf.Clamp(phaseValue, minPhaseValue, maxPhaseValue);
-        targetMaterial.SetFloat(phasePropertyId, clampedPhaseValue);
+        targetMaterial.SetFloat(phasePropertyId, phaseValue);
     }
 
-    // =========================
-    // Smooth control
-    // =========================
-
-    public void SetPhaseImmediate(float targetPhaseValue)
+    // 클릭용: 호출할 함수 1개만 남김
+    // 현재 값 기준으로 0 <-> 1 토글하면서 durationSeconds 동안 보간
+    public void PhaseToggle(float durationSeconds)
     {
-        phaseValue = Mathf.Clamp(targetPhaseValue, minPhaseValue, maxPhaseValue);
-        Apply();
-    }
-
-    public void SetPhaseSmooth(float targetPhaseValue, float durationSeconds)
-    {
-        float clampedTargetPhaseValue = Mathf.Clamp(targetPhaseValue, minPhaseValue, maxPhaseValue);
+        float targetValue = (phaseValue > 0f) ? -0.6f : 0.6f;
 
         if (durationSeconds <= 0f)
         {
-            SetPhaseImmediate(clampedTargetPhaseValue);
+            phaseValue = targetValue;
+            Apply();
             return;
         }
 
-        if (phaseSmoothCoroutine != null)
+        if (toggleCoroutine != null)
         {
-            StopCoroutine(phaseSmoothCoroutine);
+            StopCoroutine(toggleCoroutine);
         }
 
-        phaseSmoothCoroutine = StartCoroutine(CoSetPhaseSmooth(clampedTargetPhaseValue, durationSeconds));
+        toggleCoroutine = StartCoroutine(PhaseCoroutine(targetValue, durationSeconds));
     }
 
-    public void TogglePhaseSmooth(float durationSeconds)
+    IEnumerator PhaseCoroutine(float targetValue, float durationSeconds)
     {
-        float midPhaseValue = (minPhaseValue + maxPhaseValue) * 0.5f;
-        float targetPhaseValue = (phaseValue >= midPhaseValue) ? minPhaseValue : maxPhaseValue;
-        SetPhaseSmooth(targetPhaseValue, durationSeconds);
-    }
-
-    IEnumerator CoSetPhaseSmooth(float targetPhaseValue, float durationSeconds)
-    {
-        float startPhaseValue = phaseValue;
+        float startValue = phaseValue;
         float elapsedSeconds = 0f;
 
         while (elapsedSeconds < durationSeconds)
@@ -105,17 +79,15 @@ public class PhaseGimmick : MonoBehaviour
             elapsedSeconds += Time.deltaTime;
 
             float normalizedTime = elapsedSeconds / durationSeconds;
-            float interpolatedPhaseValue = Mathf.Lerp(startPhaseValue, targetPhaseValue, normalizedTime);
+            phaseValue = Mathf.Lerp(startValue, targetValue, normalizedTime);
 
-            phaseValue = Mathf.Clamp(interpolatedPhaseValue, minPhaseValue, maxPhaseValue);
             Apply();
-
             yield return null;
         }
 
-        phaseValue = Mathf.Clamp(targetPhaseValue, minPhaseValue, maxPhaseValue);
+        phaseValue = targetValue;
         Apply();
 
-        phaseSmoothCoroutine = null;
+        toggleCoroutine = null;
     }
 }

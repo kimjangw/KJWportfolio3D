@@ -7,18 +7,14 @@ public class DesolveGimmick : MonoBehaviour
     public Material targetMaterial;
 
     [Header("Shader Property Reference")]
-    public string desolvePropertyReference = "_DesolveValue"; // 스크린샷 Reference와 동일해야 함
+    public string desolvePropertyReference = "_DesolveValue"; // ShaderGraph Reference와 동일
 
-    [Header("Control")]
+    [Header("Control (toggle)")]
     [Range(0f, 1f)]
     public float desolveValue = 1f;
 
-    [Header("Range")]
-    public float minDesolveValue = 0f;
-    public float maxDesolveValue = 1f;
-
     int desolvePropertyId;
-    Coroutine desolveSmoothCoroutine;
+    Coroutine toggleCoroutine;
 
     void Awake()
     {
@@ -26,13 +22,7 @@ public class DesolveGimmick : MonoBehaviour
         Apply();
     }
 
-    void OnValidate()
-    {
-        desolvePropertyId = Shader.PropertyToID(desolvePropertyReference);
-        Apply();
-    }
-
-    public void Apply()
+    void Apply()
     {
         if (targetMaterial == null)
         {
@@ -42,54 +32,36 @@ public class DesolveGimmick : MonoBehaviour
         if (!targetMaterial.HasProperty(desolvePropertyId))
         {
             Debug.LogWarning(
-                $"[DesolveGimmick] Material '{targetMaterial.name}' does not have property '{desolvePropertyReference}'. " +
-                $"Check ShaderGraph property Reference name.",
+                $"[DesolveGimmick] Material '{targetMaterial.name}' does not have property '{desolvePropertyReference}'.",
                 this
             );
             return;
         }
 
-        float clampedValue = Mathf.Clamp(desolveValue, minDesolveValue, maxDesolveValue);
-        targetMaterial.SetFloat(desolvePropertyId, clampedValue);
+        targetMaterial.SetFloat(desolvePropertyId, desolveValue);
     }
 
-    // =========================
-    // Smooth control
-    // =========================
-
-    public void SetDesolveImmediate(float targetValue)
+    // 클릭 시 호출: 0 ↔ 1 토글 + durationSeconds 동안 보간
+    public void DesolveToggle(float durationSeconds)
     {
-        desolveValue = Mathf.Clamp(targetValue, minDesolveValue, maxDesolveValue);
-        Apply();
-    }
-
-    public void SetDesolveSmooth(float targetValue, float durationSeconds)
-    {
-        float clampedTargetValue = Mathf.Clamp(targetValue, minDesolveValue, maxDesolveValue);
+        float targetValue = (desolveValue >= 0.5f) ? 0f : 1f;
 
         if (durationSeconds <= 0f)
         {
-            SetDesolveImmediate(clampedTargetValue);
+            desolveValue = targetValue;
+            Apply();
             return;
         }
 
-        if (desolveSmoothCoroutine != null)
+        if (toggleCoroutine != null)
         {
-            StopCoroutine(desolveSmoothCoroutine);
+            StopCoroutine(toggleCoroutine);
         }
 
-        desolveSmoothCoroutine = StartCoroutine(CoSetDesolveSmooth(clampedTargetValue, durationSeconds));
+        toggleCoroutine = StartCoroutine(DesolveCoroutine(targetValue, durationSeconds));
     }
 
-    // 클릭할 때마다 0 ↔ 1 스왑(보간)
-    public void ToggleDesolveSmooth(float durationSeconds)
-    {
-        float midValue = (minDesolveValue + maxDesolveValue) * 0.5f;
-        float targetValue = (desolveValue >= midValue) ? minDesolveValue : maxDesolveValue;
-        SetDesolveSmooth(targetValue, durationSeconds);
-    }
-
-    IEnumerator CoSetDesolveSmooth(float targetValue, float durationSeconds)
+    IEnumerator DesolveCoroutine(float targetValue, float durationSeconds)
     {
         float startValue = desolveValue;
         float elapsedSeconds = 0f;
@@ -99,17 +71,15 @@ public class DesolveGimmick : MonoBehaviour
             elapsedSeconds += Time.deltaTime;
 
             float normalizedTime = elapsedSeconds / durationSeconds;
-            float interpolatedValue = Mathf.Lerp(startValue, targetValue, normalizedTime);
+            desolveValue = Mathf.Lerp(startValue, targetValue, normalizedTime);
 
-            desolveValue = Mathf.Clamp(interpolatedValue, minDesolveValue, maxDesolveValue);
             Apply();
-
             yield return null;
         }
 
-        desolveValue = Mathf.Clamp(targetValue, minDesolveValue, maxDesolveValue);
+        desolveValue = targetValue;
         Apply();
 
-        desolveSmoothCoroutine = null;
+        toggleCoroutine = null;
     }
 }

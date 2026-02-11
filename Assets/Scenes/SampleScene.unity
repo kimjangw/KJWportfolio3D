@@ -1422,8 +1422,8 @@ GameObject:
   - component: {fileID: 753636103}
   - component: {fileID: 753636102}
   - component: {fileID: 753636101}
-  m_Layer: 0
-  m_Name: Cube (6)
+  m_Layer: 8
+  m_Name: Desolvecube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1454,7 +1454,7 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -3067,6 +3067,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1413056181}
+  - component: {fileID: 1413056182}
   m_Layer: 0
   m_Name: Road
   m_TagString: Untagged
@@ -3097,6 +3098,22 @@ Transform:
   - {fileID: 1274173920}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1413056182
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1413056180}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4625931b118d044d8b094e6c6fc0bf4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controlMode: 0
+  phaseALayerName: PhaseA
+  phaseBLayerName: PhaseB
+  desolveLayerName: Desolve
 --- !u!1 &1417417423
 GameObject:
   m_ObjectHideFlags: 0
@@ -3190,8 +3207,6 @@ MonoBehaviour:
   shaderGraphMaterialB: {fileID: 2100000, guid: 68e54ce41eb3c8e49aa28d731374502f, type: 2}
   phasePropertyReference: _PhaseValue
   phaseValue: 0.6
-  minPhaseValue: -0.6
-  maxPhaseValue: 0.6
 --- !u!114 &1417417428
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3207,9 +3222,6 @@ MonoBehaviour:
   targetMaterial: {fileID: 2100000, guid: e4b0ba1a7b76ee041b39405607caa6f5, type: 2}
   desolvePropertyReference: _DesolveValue
   desolveValue: 1
-  minDesolveValue: 0
-  maxDesolveValue: 1
-  findColliderInChildren: 1
 --- !u!1001 &1419081246
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3428,8 +3440,8 @@ GameObject:
   - component: {fileID: 1517274460}
   - component: {fileID: 1517274459}
   - component: {fileID: 1517274458}
-  m_Layer: 0
-  m_Name: Cube (7)
+  m_Layer: 7
+  m_Name: PhaseBcube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3460,12 +3472,12 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -4120,8 +4132,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3da7647021f79c42bf42da5ca144eff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  phaseGimmick: {fileID: 0}
-  desolveGimmick: {fileID: 0}
+  gimmickController: {fileID: 1413056182}
+  phaseGimmick: {fileID: 1417417427}
+  desolveGimmick: {fileID: 1417417428}
   ToggleDurationSeconds: 0.35
 --- !u!143 &1911539892
 CharacterController:
@@ -4190,6 +4203,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3da7647021f79c42bf42da5ca144eff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gimmickController: {fileID: 1413056182}
   phaseGimmick: {fileID: 1417417427}
   desolveGimmick: {fileID: 1417417428}
   ToggleDurationSeconds: 0.35
@@ -4205,8 +4219,8 @@ GameObject:
   - component: {fileID: 2009445823}
   - component: {fileID: 2009445822}
   - component: {fileID: 2009445821}
-  m_Layer: 0
-  m_Name: Cube (5)
+  m_Layer: 6
+  m_Name: PhaseAcube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4237,7 +4251,7 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
