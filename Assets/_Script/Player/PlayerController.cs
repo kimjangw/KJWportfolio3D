@@ -9,8 +9,8 @@ public class PlayerController : MonoBehaviour
     public GimmickController gimmickController;
 
 
-    float walkSpeed = 3f;
-    float runSpeed = 6f;
+    float walkSpeed = 1f;
+    float runSpeed = 3f;
 
 
     int hashMoveX;
