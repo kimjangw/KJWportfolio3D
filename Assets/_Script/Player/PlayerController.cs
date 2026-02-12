@@ -32,7 +32,6 @@ public class PlayerController : MonoBehaviour
     public float ToggleDurationSeconds = 0.35f;
 
     int hashMoveX, hashMoveY, hashJump;
-    int hashMouseLeft, hashMouseRight;
 
     private void Awake()
     {
@@ -42,13 +41,10 @@ public class PlayerController : MonoBehaviour
         hashMoveX = Animator.StringToHash("MoveX");
         hashMoveY = Animator.StringToHash("MoveY");
         hashJump = Animator.StringToHash("Jump");
-        hashMouseLeft = Animator.StringToHash("MouseLeft");
-        hashMouseRight = Animator.StringToHash("MouseRight");
     }
 
     private void OnEnable()
     {
-        // 1회성 입력 액션들 등록
         InputManager.OnJump += HandleJump;
         InputManager.OnLeftClick += MouseLeftClick;
         InputManager.OnRightClick += MouseRightClick;
@@ -61,10 +57,8 @@ public class PlayerController : MonoBehaviour
         InputManager.OnRightClick -= MouseRightClick;
     }
 
-    // 좌클릭 기믹: Phase 토글
     private void MouseLeftClick()
     {
-        Debug.Log("좌클릭 기믹 발동");
         if (phaseGimmick != null)
         {
             phaseGimmick.PhaseToggle(ToggleDurationSeconds);
@@ -72,10 +66,8 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    // 우클릭 기믹: Desolve 토글
     private void MouseRightClick()
     {
-        Debug.Log("우클릭 기믹 발동");
         if (desolveGimmick != null)
         {
             desolveGimmick.DesolveToggle(ToggleDurationSeconds);
@@ -96,11 +88,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         isGrounded = CheckGroundedWithTag();
-
-        if (isGrounded && velocity.y < 0)
-        {
-            velocity.y = -5f;
-        }
+        if (isGrounded && velocity.y < 0) velocity.y = -5f;
 
         PlayerMove(InputManager.Input, InputManager.IsSprint);
 
@@ -108,18 +96,16 @@ public class PlayerController : MonoBehaviour
         cc.Move(velocity * Time.deltaTime);
     }
 
+    // CameraZoneTrigger에서 호출 (ClearShot 활성화 시 방향 고정)
     public void SetCameraZoneMode(bool active)
     {
         isInCameraZone = active;
         if (active)
         {
             lockedForward = Camera.main.transform.forward;
-            lockedForward.y = 0;
-            lockedForward.Normalize();
-
+            lockedForward.y = 0; lockedForward.Normalize();
             lockedRight = Camera.main.transform.right;
-            lockedRight.y = 0;
-            lockedRight.Normalize();
+            lockedRight.y = 0; lockedRight.Normalize();
         }
     }
 
@@ -128,10 +114,13 @@ public class PlayerController : MonoBehaviour
         if (input.magnitude > 0.1f)
         {
             Vector3 moveDir;
+            Vector3 lookDir;
 
+            // 1. 이동 방향 및 시선 방향 계산 (ClearShot 구역 대응)
             if (isInCameraZone)
             {
                 moveDir = (lockedForward * input.y + lockedRight * input.x).normalized;
+                lookDir = lockedForward; // 구역 진입 시점의 정면 고정
             }
             else
             {
@@ -139,14 +128,20 @@ public class PlayerController : MonoBehaviour
                 Vector3 camRight = Camera.main.transform.right;
                 camForward.y = 0; camRight.y = 0;
                 moveDir = (camForward.normalized * input.y + camRight.normalized * input.x).normalized;
+                lookDir = camForward.normalized; // 현재 카메라가 보는 정면
             }
 
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(moveDir), Time.deltaTime * 10f);
+            // 2. 캐릭터 회전: 이동 방향이 아닌 '카메라 정면'을 바라보게 함
+            // 이렇게 해야 S를 누를 때 몸을 돌리지 않고 뒤로 걷는 애니메이션이 나옵니다.
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(lookDir), Time.deltaTime * 10f);
+
+            // 3. 실제 이동 적용
             float curSpeed = isLeftShiftPressed ? runSpeed : walkSpeed;
             cc.Move(moveDir * curSpeed * Time.deltaTime);
 
+            // 4. 애니메이터 전달: 블렌드 트리의 좌/우/후진 파라미터 활용
             float animSpeed = isLeftShiftPressed ? 2f : 1f;
-            anim.SetFloat(hashMoveX, input.x);
+            anim.SetFloat(hashMoveX, input.x * animSpeed);
             anim.SetFloat(hashMoveY, input.y * animSpeed);
         }
         else
