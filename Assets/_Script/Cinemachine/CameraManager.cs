@@ -1,13 +1,13 @@
 using UnityEngine;
-using Unity.Cinemachine; // Unity 6 필수 네임스페이스
+using Unity.Cinemachine; 
 
 public class CameraManager : MonoBehaviour
 {
     public static CameraManager Instance;
 
     [Header("Cameras")]
-    public CinemachineCamera freeLookCamera;  // 인스펙터에서 FreeLook 할당
-    public CinemachineClearShot clearShotCamera; // 인스펙터에서 ClearShot 할당
+    public CinemachineCamera freeLookCamera; 
+    public CinemachineClearShot clearShotCamera; 
 
     [Header("Priority Settings")]
     public int activePriority = 20;
