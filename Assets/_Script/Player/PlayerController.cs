@@ -31,7 +31,7 @@ public class PlayerController : MonoBehaviour
     public DesolveGimmick desolveGimmick;
     public float ToggleDurationSeconds = 0.35f;
 
-    int hashMoveX, hashMoveY, hashJump;
+    int hashMoveX, hashMoveY, hashJump, hashPickUp;
 
     private void Awake()
     {
@@ -41,6 +41,7 @@ public class PlayerController : MonoBehaviour
         hashMoveX = Animator.StringToHash("MoveX");
         hashMoveY = Animator.StringToHash("MoveY");
         hashJump = Animator.StringToHash("Jump");
+        hashPickUp = Animator.StringToHash("PickUp");
     }
 
     private void OnEnable()
@@ -61,6 +62,7 @@ public class PlayerController : MonoBehaviour
     {
         if (phaseGimmick != null)
         {
+            anim.SetTrigger(hashPickUp);
             phaseGimmick.PhaseToggle(ToggleDurationSeconds);
             if (gimmickController != null) gimmickController.TogglePhaseAB();
         }
@@ -70,6 +72,7 @@ public class PlayerController : MonoBehaviour
     {
         if (desolveGimmick != null)
         {
+            anim.SetTrigger(hashPickUp);
             desolveGimmick.DesolveToggle(ToggleDurationSeconds);
             if (gimmickController != null) gimmickController.ToggleDesolveSolid();
         }
@@ -79,6 +82,7 @@ public class PlayerController : MonoBehaviour
     {
         if (isGrounded)
         {
+           
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
             anim.SetTrigger(hashJump);
             isGrounded = false;
