@@ -4,23 +4,16 @@ using UnityEngine.SceneManagement;
 public class SceneTransitionCollision : MonoBehaviour
 {
     [Header("Next Scene Settings")]
-    public string nextSceneName = "GameScene";
-    public string playerLayerName = "Player";
+    public string nextSceneName = "MainScene";
+    public string targetTag = "FinishLine"; // 부딪힐 큐브의 태그를 여기에 입력
 
-    private int playerLayerIndex;
-
-    private void Awake()
+    // OnCollisionEnter 대신 CharacterController 전용 충돌 감지 함수를 사용합니다.
+    private void OnControllerColliderHit(ControllerColliderHit hit)
     {
-        playerLayerIndex = LayerMask.NameToLayer(playerLayerName);
-    }
-
-    // Is Trigger가 꺼져 있는 딱딱한 콜라이더끼리 부딪혔을 때 호출됩니다.
-    private void OnCollisionEnter(Collision collision)
-    {
-        // 충돌한 오브젝트(collision.gameObject)의 레이어 확인
-        if (collision.gameObject.layer == playerLayerIndex)
+        // 부딪힌 오브젝트의 태그가 설정한 태그(예: Finish)와 같은지 확인
+        if (hit.gameObject.CompareTag(targetTag))
         {
-            Debug.Log($"[SceneTransition] 벽에 부딪힘! '{nextSceneName}' 씬 로드");
+            Debug.Log($"[SceneTransition] '{targetTag}' 벽과 충돌! '{nextSceneName}' 씬 로드");
             SceneManager.LoadScene(nextSceneName);
         }
     }
