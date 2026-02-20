@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("Hit Penalty Settings")]
     public float penaltyDuration = 1.0f;
-    public float penaltySpeed = 0f;
+    public float penaltySpeed = 0.3f;
     private bool isPenalized = false;
     public UnityEngine.Rendering.Volume hitVolume;
 
@@ -189,18 +189,34 @@ public class PlayerController : MonoBehaviour
     private System.Collections.IEnumerator HitPenaltyRoutine()
     {
         isPenalized = true;
-        if (hitVolume != null) hitVolume.weight = 1f;
-
         float timer = 0f;
+
+        // 전체 시간의 절반(예: 1초면 0.5초)을 구합니다.
+        float halfDuration = penaltyDuration / 2f;
+
         while (timer < penaltyDuration)
         {
             timer += Time.deltaTime;
+
             if (hitVolume != null)
-                hitVolume.weight = Mathf.Lerp(1f, 0f, timer / penaltyDuration);
+            {
+                if (timer < halfDuration)
+                {
+                    // [1단계] 처음 절반의 시간 동안: Weight를 0에서 1로 서서히 올립니다.
+                    // (이때 비네트는 0.4, 크로마틱은 1을 향해 올라갑니다)
+                    hitVolume.weight = Mathf.Lerp(0f, 1f, timer / halfDuration);
+                }
+                else
+                {
+                    // [2단계] 나머지 절반의 시간 동안: Weight를 1에서 다시 0으로 서서히 내립니다.
+                    hitVolume.weight = Mathf.Lerp(1f, 0f, (timer - halfDuration) / halfDuration);
+                }
+            }
 
             yield return null;
         }
 
+        // 시간이 다 끝나면 확실하게 0으로 초기화하고 패널티를 풉니다.
         isPenalized = false;
         if (hitVolume != null) hitVolume.weight = 0f;
     }
@@ -209,13 +225,15 @@ public class PlayerController : MonoBehaviour
     {
         if (isPhaseA)
         {
-            Physics.IgnoreLayerCollision(playerLayer, ballALayer, true);
-            Physics.IgnoreLayerCollision(playerLayer, ballBLayer, false);
+            // [Phase A 상태] Ball_A와 부딪힘(false), Ball_B는 유령처럼 통과(true)
+            Physics.IgnoreLayerCollision(playerLayer, ballALayer, false);
+            Physics.IgnoreLayerCollision(playerLayer, ballBLayer, true);
         }
         else
         {
-            Physics.IgnoreLayerCollision(playerLayer, ballALayer, false);
-            Physics.IgnoreLayerCollision(playerLayer, ballBLayer, true);
+            // [Phase B 상태] Ball_A는 유령처럼 통과(true), Ball_B와 부딪힘(false)
+            Physics.IgnoreLayerCollision(playerLayer, ballALayer, true);
+            Physics.IgnoreLayerCollision(playerLayer, ballBLayer, false);
         }
     }
 }
