@@ -31,6 +31,18 @@ public class PlayerController : MonoBehaviour
     public DesolveGimmick desolveGimmick;
     public float ToggleDurationSeconds = 0.35f;
 
+    [Header("Hit Penalty Settings")]
+    public float penaltyDuration = 1.0f;
+    public float penaltySpeed = 0.3f;
+    private bool isPenalized = false;
+    public UnityEngine.Rendering.Volume hitVolume;
+
+    [Header("Phase Collision")]
+    public bool isPhaseA = true;
+    private int playerLayer;
+    private int ballALayer;
+    private int ballBLayer;
+
     int hashMoveX, hashMoveY, hashJump, hashPickUp;
 
     private void Awake()
@@ -42,6 +54,12 @@ public class PlayerController : MonoBehaviour
         hashMoveY = Animator.StringToHash("MoveY");
         hashJump = Animator.StringToHash("Jump");
         hashPickUp = Animator.StringToHash("PickUp");
+
+        playerLayer = LayerMask.NameToLayer("Player");
+        ballALayer = LayerMask.NameToLayer("Ball_A");
+        ballBLayer = LayerMask.NameToLayer("Ball_B");
+
+        UpdateBallCollision();
     }
 
     private void OnEnable()
@@ -65,6 +83,9 @@ public class PlayerController : MonoBehaviour
             anim.SetTrigger(hashPickUp);
             phaseGimmick.PhaseToggle(ToggleDurationSeconds);
             if (gimmickController != null) gimmickController.TogglePhaseAB();
+
+            isPhaseA = !isPhaseA;
+            UpdateBallCollision();
         }
     }
 
@@ -82,7 +103,6 @@ public class PlayerController : MonoBehaviour
     {
         if (isGrounded)
         {
-           
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
             anim.SetTrigger(hashJump);
             isGrounded = false;
@@ -100,7 +120,6 @@ public class PlayerController : MonoBehaviour
         cc.Move(velocity * Time.deltaTime);
     }
 
-    // CameraZoneTrigger에서 호출 (ClearShot 활성화 시 방향 고정)
     public void SetCameraZoneMode(bool active)
     {
         isInCameraZone = active;
@@ -120,11 +139,10 @@ public class PlayerController : MonoBehaviour
             Vector3 moveDir;
             Vector3 lookDir;
 
-            // 1. 이동 방향 및 시선 방향 계산 (ClearShot 구역 대응)
             if (isInCameraZone)
             {
                 moveDir = (lockedForward * input.y + lockedRight * input.x).normalized;
-                lookDir = lockedForward; // 구역 진입 시점의 정면 고정
+                lookDir = lockedForward;
             }
             else
             {
@@ -132,19 +150,15 @@ public class PlayerController : MonoBehaviour
                 Vector3 camRight = Camera.main.transform.right;
                 camForward.y = 0; camRight.y = 0;
                 moveDir = (camForward.normalized * input.y + camRight.normalized * input.x).normalized;
-                lookDir = camForward.normalized; // 현재 카메라가 보는 정면
+                lookDir = camForward.normalized;
             }
 
-            // 2. 캐릭터 회전: 이동 방향이 아닌 '카메라 정면'을 바라보게 함
-            // 이렇게 해야 S를 누를 때 몸을 돌리지 않고 뒤로 걷는 애니메이션이 나옵니다.
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(lookDir), Time.deltaTime * 10f);
 
-            // 3. 실제 이동 적용
-            float curSpeed = isLeftShiftPressed ? runSpeed : walkSpeed;
+            float curSpeed = isPenalized ? penaltySpeed : (isLeftShiftPressed ? runSpeed : walkSpeed);
             cc.Move(moveDir * curSpeed * Time.deltaTime);
 
-            // 4. 애니메이터 전달: 블렌드 트리의 좌/우/후진 파라미터 활용
-            float animSpeed = isLeftShiftPressed ? 2f : 1f;
+            float animSpeed = isPenalized ? 0f : (isLeftShiftPressed ? 2f : 1f);
             anim.SetFloat(hashMoveX, input.x * animSpeed);
             anim.SetFloat(hashMoveY, input.y * animSpeed);
         }
@@ -164,5 +178,62 @@ public class PlayerController : MonoBehaviour
             if (hit.collider.CompareTag(groundTag)) return true;
         }
         return cc.isGrounded;
+    }
+
+    public void TakeHit()
+    {
+        StopCoroutine("HitPenaltyRoutine");
+        StartCoroutine("HitPenaltyRoutine");
+    }
+
+    private System.Collections.IEnumerator HitPenaltyRoutine()
+    {
+        isPenalized = true;
+        float timer = 0f;
+
+        // 전체 시간의 절반(예: 1초면 0.5초)을 구합니다.
+        float halfDuration = penaltyDuration / 2f;
+
+        while (timer < penaltyDuration)
+        {
+            timer += Time.deltaTime;
+
+            if (hitVolume != null)
+            {
+                if (timer < halfDuration)
+                {
+                    // [1단계] 처음 절반의 시간 동안: Weight를 0에서 1로 서서히 올립니다.
+                    // (이때 비네트는 0.4, 크로마틱은 1을 향해 올라갑니다)
+                    hitVolume.weight = Mathf.Lerp(0f, 1f, timer / halfDuration);
+                }
+                else
+                {
+                    // [2단계] 나머지 절반의 시간 동안: Weight를 1에서 다시 0으로 서서히 내립니다.
+                    hitVolume.weight = Mathf.Lerp(1f, 0f, (timer - halfDuration) / halfDuration);
+                }
+            }
+
+            yield return null;
+        }
+
+        // 시간이 다 끝나면 확실하게 0으로 초기화하고 패널티를 풉니다.
+        isPenalized = false;
+        if (hitVolume != null) hitVolume.weight = 0f;
+    }
+
+    private void UpdateBallCollision()
+    {
+        if (isPhaseA)
+        {
+            // [Phase A 상태] Ball_A와 부딪힘(false), Ball_B는 유령처럼 통과(true)
+            Physics.IgnoreLayerCollision(playerLayer, ballALayer, false);
+            Physics.IgnoreLayerCollision(playerLayer, ballBLayer, true);
+        }
+        else
+        {
+            // [Phase B 상태] Ball_A는 유령처럼 통과(true), Ball_B와 부딪힘(false)
+            Physics.IgnoreLayerCollision(playerLayer, ballALayer, true);
+            Physics.IgnoreLayerCollision(playerLayer, ballBLayer, false);
+        }
     }
 }
