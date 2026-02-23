@@ -1316,7 +1316,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 175195664}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.00024638587, y: 0.9962553, z: -0.002840559, w: -0.0864137}
+  m_LocalRotation: {x: -0.0002464346, y: 0.9962537, z: -0.0028405287, w: -0.08643158}
   m_LocalPosition: {x: 7, y: -4.45, z: 3.8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -7994,7 +7994,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 992108905}
   serializedVersion: 2
-  m_LocalRotation: {x: 2.7075866e-11, y: -0.714143, z: 2.7276067e-11, w: 0.69999987}
+  m_LocalRotation: {x: -0.000000012032462, y: -0.714143, z: -0.00000001227557, w: 0.6999999}
   m_LocalPosition: {x: 233.8, y: 21.88, z: 158.7872}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -11374,7 +11374,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1512646366}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.14613546, y: 4.4726327e-24, z: -7.46144e-24, w: 0.9892646}
+  m_LocalRotation: {x: 0.14613436, y: 1.459837e-11, z: -9.779456e-12, w: 0.9892648}
   m_LocalPosition: {x: 232.8, y: 22.570915, z: 157.52736}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -13330,7 +13330,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1759577650}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.00020381201, y: 0.9969054, z: -0.0025860432, w: -0.07856842}
+  m_LocalRotation: {x: -0.00020385344, y: 0.9969041, z: -0.0025860234, w: -0.078584865}
   m_LocalPosition: {x: 7, y: -4.450001, z: 12.376999}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -14246,6 +14246,11 @@ MonoBehaviour:
   phaseGimmick: {fileID: 1417417427}
   desolveGimmick: {fileID: 1417417428}
   ToggleDurationSeconds: 0.35
+  penaltyDuration: 1
+  penaltySpeed: 0.3
+  hitVolume: {fileID: 0}
+  isPhaseA: 1
+  isInputLocked: 0
 --- !u!143 &1911539892
 CharacterController:
   m_ObjectHideFlags: 0
@@ -14301,6 +14306,8 @@ PlayableDirector:
   - key: {fileID: -3961566861755565988, guid: 30c3cb79a7480a94d84d3fedb5fb0f95, type: 2}
     value: {fileID: 0}
   - key: {fileID: -7832652439456797089, guid: 30c3cb79a7480a94d84d3fedb5fb0f95, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -6529983334107598732, guid: 30c3cb79a7480a94d84d3fedb5fb0f95, type: 2}
     value: {fileID: 0}
   m_ExposedReferences:
     m_References: []
@@ -15255,6 +15262,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2064831041}
   - component: {fileID: 2064831040}
+  - component: {fileID: 2064831042}
   m_Layer: 0
   m_Name: DirectorManager
   m_TagString: Untagged
@@ -15283,6 +15291,8 @@ PlayableDirector:
     value: {fileID: 1911539895}
   - key: {fileID: -7832652439456797089, guid: 30c3cb79a7480a94d84d3fedb5fb0f95, type: 2}
     value: {fileID: 1798874597}
+  - key: {fileID: -6529983334107598732, guid: 30c3cb79a7480a94d84d3fedb5fb0f95, type: 2}
+    value: {fileID: 2064831042}
   m_ExposedReferences:
     m_References:
     - 738c71e36f0716c4aa29adfb06cf8157: {fileID: 1512646371}
@@ -15302,6 +15312,51 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2064831042
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2064831039}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e52de21a22b6dd44c9cc19f810c65059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Events:
+    m_Signals:
+    - {fileID: 11400000, guid: e05984c348e0acf4087169c9048aa09e, type: 2}
+    - {fileID: 11400000, guid: b57f291e2a610ad4c8b31f8d9b1c04f0, type: 2}
+    m_Events:
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1911539891}
+          m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+          m_MethodName: SetInputLock
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1911539891}
+          m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+          m_MethodName: SetInputLock
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1001 &2065766775
 PrefabInstance:
   m_ObjectHideFlags: 0
