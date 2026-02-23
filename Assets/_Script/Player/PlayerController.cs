@@ -43,6 +43,9 @@ public class PlayerController : MonoBehaviour
     private int ballALayer;
     private int ballBLayer;
 
+    [Header("Cutscene State")]
+    public bool isInputLocked = false;
+
     int hashMoveX, hashMoveY, hashJump, hashPickUp;
 
     private void Awake()
@@ -78,6 +81,8 @@ public class PlayerController : MonoBehaviour
 
     private void MouseLeftClick()
     {
+        if (isInputLocked) return;
+
         if (phaseGimmick != null)
         {
             anim.SetTrigger(hashPickUp);
@@ -91,6 +96,8 @@ public class PlayerController : MonoBehaviour
 
     private void MouseRightClick()
     {
+        if (isInputLocked) return;
+
         if (desolveGimmick != null)
         {
             anim.SetTrigger(hashPickUp);
@@ -101,6 +108,8 @@ public class PlayerController : MonoBehaviour
 
     private void HandleJump()
     {
+        if (isInputLocked) return;
+
         if (isGrounded)
         {
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
@@ -114,7 +123,10 @@ public class PlayerController : MonoBehaviour
         isGrounded = CheckGroundedWithTag();
         if (isGrounded && velocity.y < 0) velocity.y = -5f;
 
-        PlayerMove(InputManager.Input, InputManager.IsSprint);
+        Vector2 currentInput = isInputLocked ? Vector2.zero : InputManager.Input;
+        bool currentSprint = isInputLocked ? false : InputManager.IsSprint;
+
+        PlayerMove(currentInput, currentSprint);
 
         velocity.y += gravity * Time.deltaTime;
         cc.Move(velocity * Time.deltaTime);
@@ -234,6 +246,18 @@ public class PlayerController : MonoBehaviour
             // [Phase B 상태] Ball_A는 유령처럼 통과(true), Ball_B와 부딪힘(false)
             Physics.IgnoreLayerCollision(playerLayer, ballALayer, true);
             Physics.IgnoreLayerCollision(playerLayer, ballBLayer, false);
+        }
+    }
+
+    public void SetInputLock(bool isLocked)
+    {
+        isInputLocked = isLocked;
+
+        // 입력이 막히는 순간, 걷던 애니메이션을 강제로 Idle(0)로 멈춰줍니다.
+        if (isLocked)
+        {
+            anim.SetFloat(hashMoveX, 0f);
+            anim.SetFloat(hashMoveY, 0f);
         }
     }
 }
