@@ -1344,7 +1344,7 @@ Transform:
   m_GameObject: {fileID: 187863848}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -36.11, y: 0.1, z: 14.5}
+  m_LocalPosition: {x: -36.11, y: 0.1, z: 9.25}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2571,7 +2571,7 @@ Transform:
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
   m_LocalRotation: {x: 0.1461352, y: -0.000000005506978, z: 8.1349644e-10, w: 0.98926467}
-  m_LocalPosition: {x: -36.11, y: 1.2909176, z: 13.260168}
+  m_LocalPosition: {x: -36.11, y: 1.2909176, z: 7.927168}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4811,7 +4811,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 6b5496882c5fdc04086e3cc197ae4de5, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0.083
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 6b5496882c5fdc04086e3cc197ae4de5, type: 3}
       propertyPath: m_LocalRotation.w
@@ -7203,7 +7203,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: 6b5496882c5fdc04086e3cc197ae4de5, type: 3}
       propertyPath: m_WarningMessage
-      value: 
+      value: "\nBinding warning: Some generic clip(s) animate transforms that are
+        already bound by a Humanoid avatar. These transforms can only be changed
+        by Humanoid clips.\n\tTransform 'Bip001 R Foot'\n\tTransform 'Bip001 R Hand'\n\tTransform
+        'Bip001 R Finger1'\n\tTransform 'Bip001 L Finger11'\n\tTransform 'Bip001
+        R Finger11'\n\tTransform 'Bip001 L Finger3'\n\tTransform 'Bip001 R Toe0'\n\tTransform
+        'Bip001 Spine1'\n\tTransform 'Bip001 L Finger2'\n\tTransform 'Bip001 L Finger12'\n\tand
+        more ..."
       objectReference: {fileID: 0}
     - target: {fileID: 6067667327417526380, guid: 6b5496882c5fdc04086e3cc197ae4de5, type: 3}
       propertyPath: m_Layer
@@ -8051,7 +8057,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -8119,7 +8125,7 @@ Transform:
   m_GameObject: {fileID: 799145036}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -36.155464, y: 0.60988045, z: 14.73271}
+  m_LocalPosition: {x: -36.155464, y: 0.53, z: 14.73271}
   m_LocalScale: {x: 0.09, y: 0.09, z: 0.09}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -9726,7 +9732,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -9794,7 +9800,7 @@ Transform:
   m_GameObject: {fileID: 1019782417}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -36.11, y: 0.71, z: 14.62}
+  m_LocalPosition: {x: -36.11, y: 0.525, z: 14.62}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -12304,6 +12310,8 @@ PlayableDirector:
     value: {fileID: 799145037}
   - key: {fileID: -2032154568596288830, guid: c70243ac92c4e9d4ba130cd0215dbeaf, type: 2}
     value: {fileID: 1019782418}
+  - key: {fileID: -1163110722196607594, guid: c70243ac92c4e9d4ba130cd0215dbeaf, type: 2}
+    value: {fileID: 1911539888}
   m_ExposedReferences:
     m_References:
     - 7a4dc8718372ad84a8eca6dad35b196b: {fileID: 33467251}
@@ -12383,7 +12391,7 @@ Transform:
   m_GameObject: {fileID: 1475305805}
   serializedVersion: 2
   m_LocalRotation: {x: -0.000000020161943, y: 0.000000007865418, z: -7.8567175e-10, w: 1}
-  m_LocalPosition: {x: -27.922338, y: 0.20019104, z: 7.1495795}
+  m_LocalPosition: {x: -27.950777, y: 0.148586, z: 4.484116}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -13195,7 +13203,7 @@ Transform:
   m_GameObject: {fileID: 1512646366}
   serializedVersion: 2
   m_LocalRotation: {x: 0.1461353, y: 5.245917e-15, z: -6.2272893e-16, w: 0.98926467}
-  m_LocalPosition: {x: -36.110027, y: 1.2909176, z: 13.260095}
+  m_LocalPosition: {x: -36.11, y: 1.1909175, z: 8.010168}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -14290,7 +14298,7 @@ Transform:
   m_GameObject: {fileID: 1635699084}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.92, z: 0}
+  m_LocalPosition: {x: 0, y: -0.94662684, z: 0}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -14311,7 +14319,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
