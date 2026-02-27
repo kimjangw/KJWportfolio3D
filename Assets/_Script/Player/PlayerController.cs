@@ -64,6 +64,12 @@ public class PlayerController : MonoBehaviour
 
         UpdateBallCollision();
     }
+    private void Start()
+    {
+        gimmickController = FindAnyObjectByType<GimmickController>();
+        phaseGimmick = FindAnyObjectByType<PhaseGimmick>();
+        desolveGimmick = FindAnyObjectByType<DesolveGimmick>();
+    }
 
     private void OnEnable()
     {
