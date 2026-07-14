@@ -37,12 +37,16 @@
 --
 
 - 컷씬
-<img width="1567" height="884" alt="image" src="https://github.com/user-attachments/assets/02922ebd-6a1f-457a-bc4b-21c344c47392" />
+<img width="985" height="856" alt="image" src="https://github.com/user-attachments/assets/5721ab9b-85d8-4aff-b94a-d605b36fce45" />
+<img width="983" height="856" alt="image" src="https://github.com/user-attachments/assets/8e42f338-0a08-45aa-8de6-de697d1d103d" />
+
+
 
 - Sinemachine
 
 - 플랫폼 제어
-<img width="1353" height="750" alt="image" src="https://github.com/user-attachments/assets/581d0356-e52d-4005-ad14-610d54cceee8" />
+<img width="725" height="560" alt="image" src="https://github.com/user-attachments/assets/9f9bea73-42a9-4dd7-b1cf-d654e9ba826b" />
+
 <img width="1342" height="748" alt="image" src="https://github.com/user-attachments/assets/002e3281-5ba6-4b9d-a3e4-8bb6bf57c0d1" />
 
 ---
