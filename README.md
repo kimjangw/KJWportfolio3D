@@ -37,7 +37,7 @@
 --
 
 - 컷씬  
-| 진입 컷씬 1 | 진입 컷씬 2 |
+| 진입 컷씬 1 | 진입 컷씬 2 |  
 |<img width="490" height="425" alt="image" src="https://github.com/user-attachments/assets/5721ab9b-85d8-4aff-b94a-d605b36fce45" /> | <img width="490" height="425" alt="image" src="https://github.com/user-attachments/assets/8e42f338-0a08-45aa-8de6-de697d1d103d" />  |
 
 
