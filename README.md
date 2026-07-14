@@ -46,7 +46,7 @@
 
 | ClearShot 좌측카메라 | ClearShot 우측카메라 |
 |--------|--------|
-| <img width="490" height="425" alt="image" src="https://github.com/user-attachments/assets/8c71b944-e3b4-4559-be3f-63e9bb4007c8" /> <img width="490" height="425" alt="image" src="https://github.com/user-attachments/assets/54c37a26-0357-4243-a05e-3ed56d5a480d" />  |
+| <img width="490" height="425" alt="image" src="https://github.com/user-attachments/assets/8c71b944-e3b4-4559-be3f-63e9bb4007c8" /> | <img width="490" height="425" alt="image" src="https://github.com/user-attachments/assets/54c37a26-0357-4243-a05e-3ed56d5a480d" />  |
 
 
 
