@@ -36,7 +36,13 @@
 인게임 화면
 --
 
-- 컷씬
+- 플랫폼 제어 (Shader Graph + Script)
+
+| Inspector 제어 | A 상태 | A <-> B 전환 | B 상태 |
+|--------|--------|--------|--------|
+|  <img width="220" height="160" alt="image" src="https://github.com/user-attachments/assets/9f9bea73-42a9-4dd7-b1cf-d654e9ba826b" /> | <img width="220" height="160"  alt="image" src="https://github.com/user-attachments/assets/cdf81e6b-334e-4c6c-84a1-5c9c2e04941f" /> | <img width="220" height="160"  alt="image" src="https://github.com/user-attachments/assets/1628b567-7b82-4f9b-9b67-9d128d2f4519" /> | <img width="220" height="160"  alt="image" src="https://github.com/user-attachments/assets/7f191d23-7a64-47d7-879c-08d0a8a60f37" />  |  
+
+- 컷씬 (TimeLine + Sinemachine)
   
 | 컷씬 1| 컷씬 2 |
 |--------|--------|
@@ -48,16 +54,6 @@
 |--------|--------|
 | <img width="490" height="280" alt="image" src="https://github.com/user-attachments/assets/8c71b944-e3b4-4559-be3f-63e9bb4007c8" /> | <img width="490" height="280" alt="image" src="https://github.com/user-attachments/assets/54c37a26-0357-4243-a05e-3ed56d5a480d" />  |
 
-
-
-
-
-
-- 플랫폼 제어
-
-| Inspector 제어 | A 상태 | A <-> B 전환 | B 상태 |
-|--------|--------|--------|--------|
-|  <img width="220" height="160" alt="image" src="https://github.com/user-attachments/assets/9f9bea73-42a9-4dd7-b1cf-d654e9ba826b" /> | <img width="220" height="160"  alt="image" src="https://github.com/user-attachments/assets/cdf81e6b-334e-4c6c-84a1-5c9c2e04941f" /> | <img width="220" height="160"  alt="image" src="https://github.com/user-attachments/assets/1628b567-7b82-4f9b-9b67-9d128d2f4519" /> | <img width="220" height="160"  alt="image" src="https://github.com/user-attachments/assets/7f191d23-7a64-47d7-879c-08d0a8a60f37" />  |  
 
 ---
 
