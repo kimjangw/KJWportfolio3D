@@ -1,7 +1,13 @@
 # 기술구현 3D Portfolio
 
 목표 : TimeLine, Sinemachine, Shader Graph를 주로 사용하여 기술 숙달.
-<img width="1570" height="880" alt="image" src="https://github.com/user-attachments/assets/446972f2-42a9-4b98-88ba-7441de26ae6a" />
+
+| TutorialScene | GameScene |
+|-----------|------|
+| <img width="738" height="466" alt="image" src="https://github.com/user-attachments/assets/3893a49f-9ec4-4730-aff5-851d781e8368" />
+ | <img width="532" height="532" alt="image" src="https://github.com/user-attachments/assets/17a2fb5f-69e3-4c1f-b844-a99198b84825" /> |
+
+
 
 ---
 
@@ -10,7 +16,7 @@
 
 | 분류 | 내용 |
 |------|------|
-| **장르** | 3D 플랫포 |
+| **장르** | 3D 플랫포머 |
 | **플랫폼** | PC |
 | **엔진** | Unity 6.0 LTS |
 | **언어** | C# |
@@ -23,7 +29,7 @@
 
 게임 소개
 --
-3D 플랫포머를 기반으로  TimeLine + Sinemachine을 같이 사용하여 컷씬을 제작하였습니다.
+3D 플랫포머를 기반으로  TimeLine + Sinemachine을 같이 사용하여 컷씬을 제작하였습니다.  
 스크립트를 이용하여 버튼클릭 시 Inspector값과 Shader Graph를 제어하여 플랫폼을 전환합니다.
 
 ---
@@ -33,6 +39,8 @@
 
 - 컷씬
 <img width="1567" height="884" alt="image" src="https://github.com/user-attachments/assets/02922ebd-6a1f-457a-bc4b-21c344c47392" />
+
+- Sinemachine
 
 - 플랫폼 제어
 <img width="1353" height="750" alt="image" src="https://github.com/user-attachments/assets/581d0356-e52d-4005-ad14-610d54cceee8" />
