@@ -42,8 +42,17 @@
 |--------|--------|
 |<img width="490" height="425" alt="image" src="https://github.com/user-attachments/assets/5721ab9b-85d8-4aff-b94a-d605b36fce45" /> | <img width="490" height="425" alt="image" src="https://github.com/user-attachments/assets/8e42f338-0a08-45aa-8de6-de697d1d103d" />  |
 
-
 - Sinemachine
+
+| ClearShot 좌측카메라 | ClearShot 우측카메라 |
+|--------|--------|
+| <img width="490" height="425" alt="image" src="https://github.com/user-attachments/assets/8c71b944-e3b4-4559-be3f-63e9bb4007c8" /> <img width="490" height="425" alt="image" src="https://github.com/user-attachments/assets/54c37a26-0357-4243-a05e-3ed56d5a480d" />
+  |
+
+
+
+
+
 
 - 플랫폼 제어
 <img width="725" height="560" alt="image" src="https://github.com/user-attachments/assets/9f9bea73-42a9-4dd7-b1cf-d654e9ba826b" />
