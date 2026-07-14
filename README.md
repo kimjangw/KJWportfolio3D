@@ -54,9 +54,15 @@
 
 
 - 플랫폼 제어
-<img width="725" height="560" alt="image" src="https://github.com/user-attachments/assets/9f9bea73-42a9-4dd7-b1cf-d654e9ba826b" />
 
-<img width="1342" height="748" alt="image" src="https://github.com/user-attachments/assets/002e3281-5ba6-4b9d-a3e4-8bb6bf57c0d1" />
+| Inspector 제어 | A 상태 | A <-> B 전환 | B 상태 |
+|--------|--------|--------|--------|
+|  <img width="725" height="560" alt="image" src="https://github.com/user-attachments/assets/9f9bea73-42a9-4dd7-b1cf-d654e9ba826b" />  | 
+<img width="961" height="537" alt="image" src="https://github.com/user-attachments/assets/cdf81e6b-334e-4c6c-84a1-5c9c2e04941f" /> |
+
+<img width="986" height="543" alt="image" src="https://github.com/user-attachments/assets/1628b567-7b82-4f9b-9b67-9d128d2f4519" /> |
+
+<img width="978" height="538" alt="image" src="https://github.com/user-attachments/assets/7f191d23-7a64-47d7-879c-08d0a8a60f37" /> |
 
 ---
 
