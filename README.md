@@ -4,7 +4,7 @@
 
 | TutorialScene | GameScene |
 |-----------|------|
-| <img width="400" height="400" alt="image" src="https://github.com/user-attachments/assets/3893a49f-9ec4-4730-aff5-851d781e8368" /> | <img width="400" height="400" alt="image" src="https://github.com/user-attachments/assets/17a2fb5f-69e3-4c1f-b844-a99198b84825" /> |
+| <img width="400" height="400" alt="image" src="https://github.com/user-attachments/assets/3893a49f-9ec4-4730-aff5-851d781e8368" /> <img width="400" height="400" alt="image" src="https://github.com/user-attachments/assets/17a2fb5f-69e3-4c1f-b844-a99198b84825" />  |
 
 
 
