@@ -29,7 +29,7 @@
 게임 소개
 --
 3D 플랫포머를 기반으로  TimeLine + Sinemachine을 같이 사용하여 컷씬을 제작하였습니다.  
-스크립트를 이용하여 버튼클릭 시 Inspector값과 Shader Graph를 제어하여 플랫폼을 전환합니다.
+스크립트를 이용하여 버튼클릭 시 Inspector값과 Shader Graph를 제어해 플랫폼을 전환합니다.
 
 ---
 
