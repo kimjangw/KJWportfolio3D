@@ -77,12 +77,12 @@
 ---
 트러블 슈팅
 --
-- URP에 대한 이해
+- Sinemachine기능 중 ClearShot 구현  
 
 
-| 단면 렌더링 | Shader Graph 작업 | 양면 렌더링 |
+| 예상 범위 밖 클리어샷 시작 | 트리거를 이용한 시작범위 조정 | 적용완료 |
 |-----------|------|------|
-| <img width="283" height="346" alt="image" src="https://github.com/user-attachments/assets/e5e04d4b-a1c7-4d8d-a373-eea71ab9b136" /> | <img width="390" height="327" alt="image" src="https://github.com/user-attachments/assets/c39fc806-d98a-4325-a6ce-c14522619457" /> | <img width="284" height="335" alt="image" src="https://github.com/user-attachments/assets/5cf6bfa4-c4f8-419d-b3c4-b984f0733ced" /> |
+| <img width="988" height="877" alt="image" src="https://github.com/user-attachments/assets/0935d434-5983-4ac7-b909-eacd5309761d" /> | <img width="458" height="293" alt="image" src="https://github.com/user-attachments/assets/6383556e-e70e-42c3-8d9d-a4cf505b484e" /> | <img width="935" height="935" alt="image" src="https://github.com/user-attachments/assets/72388f25-962c-448d-9dd3-5d2077388c31" /> |
 
 Q : 해당 커튼은 8번출구 게임처럼 꺾인 복도 형태가 아니기 때문에 전시실을 가릴 필요가 있었으나 단면 렌더링에 의해 안쪽이 보이는 이슈 발생  
 A : Shader Graph를 이용하여 양면 렌더링을 진행하였고, 후에 URP의 원리를 배운 후 Backface Culling의 최적화에 의해 뒷면이 안보이는 것을 인식하였고 법선 벡터의 각도와 카메라의 각도를 계산하여 0미만이면 뒷면이라고 판정하는 것을 이해하였습니다.
