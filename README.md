@@ -84,5 +84,5 @@
 |-----------|------|------|
 | <img width="988" height="877" alt="image" src="https://github.com/user-attachments/assets/0935d434-5983-4ac7-b909-eacd5309761d" /> | <img width="458" height="293" alt="image" src="https://github.com/user-attachments/assets/6383556e-e70e-42c3-8d9d-a4cf505b484e" /> | <img width="935" height="935" alt="image" src="https://github.com/user-attachments/assets/72388f25-962c-448d-9dd3-5d2077388c31" /> |
 
-Q : 해당 커튼은 8번출구 게임처럼 꺾인 복도 형태가 아니기 때문에 전시실을 가릴 필요가 있었으나 단면 렌더링에 의해 안쪽이 보이는 이슈 발생  
-A : Shader Graph를 이용하여 양면 렌더링을 진행하였고, 후에 URP의 원리를 배운 후 Backface Culling의 최적화에 의해 뒷면이 안보이는 것을 인식하였고 법선 벡터의 각도와 카메라의 각도를 계산하여 0미만이면 뒷면이라고 판정하는 것을 이해하였습니다.
+Q : Sinemachine의 ClearShot의 카메라 범위에 들어오자 마자 ClearShot이 발동되어 원하는 거리에서 Sinemachine카메라로 찍으면 구상하던 장면 연출이 안되었음.
+A : 해당 터널에 Box Collider의 OnTriggerEnter와 OnTriggerExit를 이용해 해당 위치에서 시네머신 카메라가 작동되고 꺼지도록 한정하여 문제를 해결.  
