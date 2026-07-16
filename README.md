@@ -85,4 +85,4 @@
 | <img width="494" height="600" alt="image" src="https://github.com/user-attachments/assets/0935d434-5983-4ac7-b909-eacd5309761d" /> | <img width="458" height="293" alt="image" src="https://github.com/user-attachments/assets/6383556e-e70e-42c3-8d9d-a4cf505b484e" /> | <img width="494" height="600" alt="image" src="https://github.com/user-attachments/assets/72388f25-962c-448d-9dd3-5d2077388c31" /> |
 
 Q : Sinemachine의 ClearShot의 카메라 범위에 들어오자 마자 ClearShot이 발동되어 원하는 거리에서 Sinemachine카메라로 찍으면 구상하던 장면 연출 불가.  
-A : 해당 터널에 Box Collider의 OnTriggerEnter와 OnTriggerExit를 이용해 해당 위치에서 시네머신 카메라가 작동되고 꺼지도록 한정하여 문제를 해결.  
+A : 해당 터널에 Box Collider를 설치하고 OnTriggerEnter와 OnTriggerExit 스크립트를 작성하여 시네머신 카메라가 작동되고 꺼지도록 한정하여 문제를 해결.  
