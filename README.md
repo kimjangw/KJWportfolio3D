@@ -1,6 +1,6 @@
 # 기술구현 3D Portfolio
 
-목표 : TimeLine, Sinemachine, Shader Graph를 주로 사용하여 기술 숙달.
+목표 : TimeLine, Cinemachine, Shader Graph를 주로 사용하여 기술 숙달.
 
 | TutorialScene | GameScene |
 |-----------|------|
@@ -28,7 +28,7 @@
 
 게임 소개
 --
-3D 플랫포머를 기반으로  TimeLine + Sinemachine을 같이 사용하여 컷씬을 제작하였습니다.  
+3D 플랫포머를 기반으로  TimeLine + Cinemachine을 같이 사용하여 컷씬을 제작하였습니다.  
 스크립트를 이용하여 버튼클릭 시 Inspector값과 Shader Graph를 제어해 플랫폼을 전환합니다.
 
 ---
@@ -42,13 +42,13 @@
 |--------|--------|--------|--------|
 |  <img width="220" height="160" alt="image" src="https://github.com/user-attachments/assets/9f9bea73-42a9-4dd7-b1cf-d654e9ba826b" /> | <img width="220" height="160"  alt="image" src="https://github.com/user-attachments/assets/cdf81e6b-334e-4c6c-84a1-5c9c2e04941f" /> | <img width="220" height="160"  alt="image" src="https://github.com/user-attachments/assets/1628b567-7b82-4f9b-9b67-9d128d2f4519" /> | <img width="220" height="160"  alt="image" src="https://github.com/user-attachments/assets/7f191d23-7a64-47d7-879c-08d0a8a60f37" />  |  
 
-- 컷씬 (TimeLine + Sinemachine)
+- 컷씬 (TimeLine + Cinemachine)
   
 | 컷씬 1| 컷씬 2 |
 |--------|--------|
 |<img width="490" height="425" alt="image" src="https://github.com/user-attachments/assets/5721ab9b-85d8-4aff-b94a-d605b36fce45" /> | <img width="490" height="425" alt="image" src="https://github.com/user-attachments/assets/8e42f338-0a08-45aa-8de6-de697d1d103d" />  |
 
-- Sinemachine (ClearShot)
+- Cinemachine (ClearShot)
 
 | ClearShot 좌측카메라 | ClearShot 우측카메라 |
 |--------|--------|
@@ -70,14 +70,14 @@
 핵심 기술
 --
 - TimeLine
-- Sinemachine
+- Cinemachine
 - Input System과 BlendTree 연동
 - Shader Graph
 
 ---
 트러블 슈팅
 --
-- Sinemachine기능 중 ClearShot 구현  
+- Cinemachine기능 중 ClearShot 구현  
 
 
 | 예상 범위 밖 클리어샷 시작 | 트리거를 이용한 시작범위 조정 | 적용완료 |
