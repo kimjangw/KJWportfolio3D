@@ -36,7 +36,7 @@
 인게임 화면
 --
 
-- 플랫폼 제어 (Shader Graph + Script)
+- 기믹 제어 (Shader Graph + Script)
 
 | Inspector 제어 | A 상태 | A <-> B 전환 | B 상태 |
 |--------|--------|--------|--------|
